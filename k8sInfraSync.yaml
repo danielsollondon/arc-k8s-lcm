@@ -1,0 +1,32 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: arc-k8s-lcm
+  namespace: flux-system
+spec:
+  interval: 10s
+  url: https://github.com/danielsollondon/arc-k8s-lcm
+  ref:
+    branch: main
+---
+apiVersion: infra.contrib.fluxcd.io/v1alpha1
+kind: Terraform
+metadata:
+  name: arc-k8s-lcm
+  namespace: flux-system
+spec:
+  interval: 30s
+  approvePlan: "auto"
+  path: /
+  sourceRef:
+    kind: GitRepository
+    name: arc-k8s-lcm
+    namespace: flux-system
+  varsFrom:
+  - kind: Secret
+    name: aws-credentials
+
+
+
+
+
