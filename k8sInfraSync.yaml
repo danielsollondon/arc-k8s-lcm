@@ -17,7 +17,7 @@ metadata:
 spec:
   interval: 30s
   approvePlan: "auto"
-  path: /
+  path: /*
   sourceRef:
     kind: GitRepository
     name: arc-k8s-lcm
